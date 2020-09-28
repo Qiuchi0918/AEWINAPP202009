@@ -1,10 +1,8 @@
 ﻿using ESRI.ArcGIS.Carto;
+using ESRI.ArcGIS.Display;
 using ESRI.ArcGIS.Geodatabase;
 using ESRI.ArcGIS.Geometry;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace AEWINAPP202009
 {
@@ -16,7 +14,10 @@ namespace AEWINAPP202009
         ClearSelection,
         ModifyExtent,
         ZoomToSelection,
-        GetCurMap,
+        GetMap,
+        GetScene,
+        GetSelectedLayer,
+        GetViewIndex,
         FormAttributeHighLightRow
     }
     public static class Tool_
@@ -49,6 +50,24 @@ namespace AEWINAPP202009
             ITopologicalOperator bufferOp = result as ITopologicalOperator;
             result = bufferOp.Buffer(n_BufferSize);
             return result;
+        }
+
+        /// <summary>
+        /// 生成一个RGBColorClaas Object，放在IRGBClass中
+        /// </summary>
+        /// <param name="_r"></param>
+        /// <param name="_g"></param>
+        /// <param name="_b"></param>
+        /// <returns></returns>
+        public static IRgbColor PutRGB(int _r, int _g, int _b)
+        {
+            IRgbColor color = new RgbColorClass
+            {
+                Red = _r < 0 || _r > 255 ? 0 : _r,
+                Green = _g < 0 || _g > 255 ? 0 : _g,
+                Blue = _b < 0 || _b > 255 ? 0 : _b
+            };
+            return color;
         }
 
     }

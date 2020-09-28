@@ -17,7 +17,7 @@ namespace AEWINAPP202009
         {
             InitializeComponent();
             m_FrmMainOper = formMainOperation;
-            m_pCurMap = m_FrmMainOper(OperationType.GetCurMap)as IMap;
+            m_pCurMap = m_FrmMainOper(OperationType.GetMap)as IMap;
             for (int i = 0; i < m_pCurMap.LayerCount; i++)
             {
                 ILayer pCurLayer = m_pCurMap.get_Layer(i);

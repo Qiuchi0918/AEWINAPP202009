@@ -39,6 +39,10 @@ namespace AEWINAPP202009
         {
             switch (type)
             {
+                case OperationType.GetViewIndex:
+                    return Ctrl_Tab.SelectedIndex;
+                case OperationType.GetSelectedLayer:
+                    return m_selectedLayer;
                 case OperationType.RefreshMapCtrl:
                     Ctrl_Map.Refresh();
                     return null;
@@ -51,8 +55,10 @@ namespace AEWINAPP202009
                 case OperationType.ModifyExtent:
                     Ctrl_Map.Extent = param as IEnvelope;
                     return null;
-                case OperationType.GetCurMap:
+                case OperationType.GetMap:
                     return Ctrl_Map.Map;
+                case OperationType.GetScene:
+                    return Ctrl_Scene.Scene;
                 case OperationType.ZoomToSelection:
                     ICommand curCmd = new ControlsZoomToSelectedCommandClass();
                     curCmd.OnCreate(Ctrl_Map.Object);
@@ -138,7 +144,7 @@ namespace AEWINAPP202009
         {
             if (m_FrmQuery == null || m_FrmQuery.IsDisposed)
             {
-                m_FrmQuery = new FormQuery(new FormMainOperation(RequestResponder));
+                m_FrmQuery = new FormQuery(RequestResponder);
                 m_FrmQuery.Show();
             }
         }
@@ -147,8 +153,7 @@ namespace AEWINAPP202009
         {
             if (m_selectedLayer != null)
             {
-                m_FrmSymbology = new FormSymbology(m_selectedLayer, Ctrl_Map, Ctrl_TOC);
-                m_FrmSymbology.frmMainOper += RequestResponder;
+                m_FrmSymbology = new FormSymbology(RequestResponder);
                 m_FrmSymbology.ShowDialog();
             }
         }
@@ -472,53 +477,37 @@ namespace AEWINAPP202009
             m_selectedLayer = pLayer as ILayer;
             if (itemType != esriTOCControlItem.esriTOCControlItemLayer)
                 return;
-            if (e.button == 2)
-                Ctrl_ContextMenuStrip.Show(Control.MousePosition);
+            switch (Ctrl_Tab.SelectedIndex)
+            {
+                case 0:
+                    if (e.button == 2)
+                        Ctrl_MapCMS.Show(Control.MousePosition);
+                    break;
+                case 1:
+                    if (e.button == 2)
+                        Ctrl_MapCMS.Show(Control.MousePosition);
+                    break;
+                case 2:
+                    if (e.button == 2)
+                        Ctrl_SceneCMS.Show(Control.MousePosition);
+                    break;
+                default:
+                    break;
+            }
         }
 
-        private void Btn_RasterWith3DProperty_Click(object sender, EventArgs e)
+        private void Btn_AddLayerToScene_Click(object sender, EventArgs e)
         {
-            ILayer pBaseLayer = null, pDisplayLayer = null;
-            for (int lyrIndex = 0; lyrIndex < Ctrl_Map.Map.LayerCount; lyrIndex++)
+            Ctrl_Scene.Scene.AddLayer(m_selectedLayer);
+        }
+
+        private void Btn_SceneLayerStyle_Click(object sender, EventArgs e)
+        {
+            if (m_selectedLayer != null)
             {
-                ILayer pCurLayer = Ctrl_Map.Map.get_Layer(lyrIndex);
-                if (pCurLayer.Name == "dom.tif")
-                {
-                    Ctrl_Scene.Scene.AddLayer(pCurLayer);
-                    pDisplayLayer = pCurLayer;
-                }
-                else if (pCurLayer.Name == "dsm.tif")
-                {
-                    Ctrl_Scene.Scene.AddLayer(pCurLayer);
-                    pBaseLayer = pCurLayer;
-                }
+                m_FrmSymbology = new FormSymbology(RequestResponder);
+                m_FrmSymbology.ShowDialog();
             }
-            IRasterSurface pBaseSurfaceRaster = new RasterSurface();
-            IRasterLayer pBaseRasterLayer = pBaseLayer as IRasterLayer;
-            IRaster pBaseRaster = (IRaster)pBaseRasterLayer.Raster;
-            IRasterBandCollection pBaseRasterBandCollection = pBaseRaster as IRasterBandCollection;
-            IRasterBand pBaseRasterBand = pBaseRasterBandCollection.Item(0);
-            pBaseSurfaceRaster.RasterBand = pBaseRasterBand;
-            ISurface pBaseSurface = pBaseSurfaceRaster as ISurface;
-            ILayerExtensions pLayerExtensions = pDisplayLayer as ILayerExtensions;
-            I3DProperties p3DProperties = null;
-            for (int i = 0; i < pLayerExtensions.ExtensionCount; i++)
-            {
-                object pCurExtension = pLayerExtensions.get_Extension(i);
-                if (pCurExtension != null)
-                {
-                    p3DProperties = (I3DProperties)pCurExtension;
-                    break;
-                }
-            }
-
-            p3DProperties.BaseOption = esriBaseOption.esriBaseSurface;
-            p3DProperties.BaseSurface = pBaseSurface;
-            p3DProperties.Apply3DProperties(pDisplayLayer);
-            p3DProperties.ZFactor = 1;
-
-            Ctrl_Scene.Scene.SceneGraph.RefreshViewers();
-
         }
     }
 }

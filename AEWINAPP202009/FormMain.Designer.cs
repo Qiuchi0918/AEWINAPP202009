@@ -31,13 +31,14 @@ namespace AEWINAPP202009
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.Ctrl_TOC = new ESRI.ArcGIS.Controls.AxTOCControl();
-            this.Ctrl_ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Ctrl_MapCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Btn_AttributeTable = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_ZoomToLayer = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_RemoveLayer = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_Symbology = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_Slope = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_RasterStatistic = new System.Windows.Forms.ToolStripMenuItem();
+            this.Btn_AddLayerToScene = new System.Windows.Forms.ToolStripMenuItem();
             this.Ctrl_MenuStrip = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_AddMapDocument = new System.Windows.Forms.ToolStripMenuItem();
@@ -47,7 +48,6 @@ namespace AEWINAPP202009
             this.Btn_Query = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_ExportSelection = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_DeleteSelection = new System.Windows.Forms.ToolStripMenuItem();
-            this.Btn_RasterWith3DProperty = new System.Windows.Forms.ToolStripMenuItem();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.Ctrl_Tab = new System.Windows.Forms.TabControl();
             this.tabDataView = new System.Windows.Forms.TabPage();
@@ -75,8 +75,10 @@ namespace AEWINAPP202009
             this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
             this.Lb_MapScale = new System.Windows.Forms.ToolStripStatusLabel();
             this.Ctrl_Toolbar = new ESRI.ArcGIS.Controls.AxToolbarControl();
+            this.Ctrl_SceneCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Btn_SceneLayerStyle = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Ctrl_TOC)).BeginInit();
-            this.Ctrl_ContextMenuStrip.SuspendLayout();
+            this.Ctrl_MapCMS.SuspendLayout();
             this.Ctrl_MenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -92,6 +94,7 @@ namespace AEWINAPP202009
             this.Ctrl_ToolStrip.SuspendLayout();
             this.Ctrl_StatusStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Ctrl_Toolbar)).BeginInit();
+            this.Ctrl_SceneCMS.SuspendLayout();
             this.SuspendLayout();
             // 
             // Ctrl_TOC
@@ -104,60 +107,68 @@ namespace AEWINAPP202009
             this.Ctrl_TOC.TabIndex = 3;
             this.Ctrl_TOC.OnMouseDown += new ESRI.ArcGIS.Controls.ITOCControlEvents_Ax_OnMouseDownEventHandler(this.Ctrl_TOC_OnMouseDown);
             // 
-            // Ctrl_ContextMenuStrip
+            // Ctrl_MapCMS
             // 
-            this.Ctrl_ContextMenuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.Ctrl_ContextMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Ctrl_MapCMS.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.Ctrl_MapCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Btn_AttributeTable,
             this.Btn_ZoomToLayer,
             this.Btn_RemoveLayer,
             this.Btn_Symbology,
             this.Btn_Slope,
-            this.Btn_RasterStatistic});
-            this.Ctrl_ContextMenuStrip.Name = "contextMenuStrip1";
-            this.Ctrl_ContextMenuStrip.Size = new System.Drawing.Size(159, 148);
+            this.Btn_RasterStatistic,
+            this.Btn_AddLayerToScene});
+            this.Ctrl_MapCMS.Name = "contextMenuStrip1";
+            this.Ctrl_MapCMS.Size = new System.Drawing.Size(198, 172);
             // 
             // Btn_AttributeTable
             // 
             this.Btn_AttributeTable.Name = "Btn_AttributeTable";
-            this.Btn_AttributeTable.Size = new System.Drawing.Size(158, 24);
+            this.Btn_AttributeTable.Size = new System.Drawing.Size(197, 24);
             this.Btn_AttributeTable.Text = "属性表";
             this.Btn_AttributeTable.Click += new System.EventHandler(this.Btn_AtrributeTable_Click);
             // 
             // Btn_ZoomToLayer
             // 
             this.Btn_ZoomToLayer.Name = "Btn_ZoomToLayer";
-            this.Btn_ZoomToLayer.Size = new System.Drawing.Size(158, 24);
+            this.Btn_ZoomToLayer.Size = new System.Drawing.Size(197, 24);
             this.Btn_ZoomToLayer.Text = "缩放到图层";
             this.Btn_ZoomToLayer.Click += new System.EventHandler(this.Btn_ZoomToLayer_Click);
             // 
             // Btn_RemoveLayer
             // 
             this.Btn_RemoveLayer.Name = "Btn_RemoveLayer";
-            this.Btn_RemoveLayer.Size = new System.Drawing.Size(158, 24);
+            this.Btn_RemoveLayer.Size = new System.Drawing.Size(197, 24);
             this.Btn_RemoveLayer.Text = "移除图层";
             this.Btn_RemoveLayer.Click += new System.EventHandler(this.Btn_RemoveLayer_Click);
             // 
             // Btn_Symbology
             // 
             this.Btn_Symbology.Name = "Btn_Symbology";
-            this.Btn_Symbology.Size = new System.Drawing.Size(158, 24);
+            this.Btn_Symbology.Size = new System.Drawing.Size(197, 24);
             this.Btn_Symbology.Text = "符号系统";
             this.Btn_Symbology.Click += new System.EventHandler(this.Btn_Symbology_Click);
             // 
             // Btn_Slope
             // 
             this.Btn_Slope.Name = "Btn_Slope";
-            this.Btn_Slope.Size = new System.Drawing.Size(158, 24);
+            this.Btn_Slope.Size = new System.Drawing.Size(197, 24);
             this.Btn_Slope.Text = "坡度";
             this.Btn_Slope.Click += new System.EventHandler(this.Btn_Slope_Click);
             // 
             // Btn_RasterStatistic
             // 
             this.Btn_RasterStatistic.Name = "Btn_RasterStatistic";
-            this.Btn_RasterStatistic.Size = new System.Drawing.Size(158, 24);
+            this.Btn_RasterStatistic.Size = new System.Drawing.Size(197, 24);
             this.Btn_RasterStatistic.Text = "栅格统计";
             this.Btn_RasterStatistic.Click += new System.EventHandler(this.Btn_RasterStatistic_Click);
+            // 
+            // Btn_AddLayerToScene
+            // 
+            this.Btn_AddLayerToScene.Name = "Btn_AddLayerToScene";
+            this.Btn_AddLayerToScene.Size = new System.Drawing.Size(197, 24);
+            this.Btn_AddLayerToScene.Text = "添加至Scene视图";
+            this.Btn_AddLayerToScene.Click += new System.EventHandler(this.Btn_AddLayerToScene_Click);
             // 
             // Ctrl_MenuStrip
             // 
@@ -183,14 +194,14 @@ namespace AEWINAPP202009
             // Btn_AddMapDocument
             // 
             this.Btn_AddMapDocument.Name = "Btn_AddMapDocument";
-            this.Btn_AddMapDocument.Size = new System.Drawing.Size(224, 26);
+            this.Btn_AddMapDocument.Size = new System.Drawing.Size(188, 26);
             this.Btn_AddMapDocument.Text = "打开地图文档";
             this.Btn_AddMapDocument.Click += new System.EventHandler(this.Btn_OpenMapDocument_Click);
             // 
             // Btn_AddData
             // 
             this.Btn_AddData.Name = "Btn_AddData";
-            this.Btn_AddData.Size = new System.Drawing.Size(224, 26);
+            this.Btn_AddData.Size = new System.Drawing.Size(188, 26);
             this.Btn_AddData.Text = "加载数据";
             this.Btn_AddData.Click += new System.EventHandler(this.Btn_AddData_Click);
             // 
@@ -200,8 +211,7 @@ namespace AEWINAPP202009
             this.Btn_Statistic,
             this.Btn_Query,
             this.Btn_ExportSelection,
-            this.Btn_DeleteSelection,
-            this.Btn_RasterWith3DProperty});
+            this.Btn_DeleteSelection});
             this.编辑ToolStripMenuItem.Name = "编辑ToolStripMenuItem";
             this.编辑ToolStripMenuItem.Size = new System.Drawing.Size(55, 24);
             this.编辑ToolStripMenuItem.Text = "工具";
@@ -233,13 +243,6 @@ namespace AEWINAPP202009
             this.Btn_DeleteSelection.Size = new System.Drawing.Size(224, 26);
             this.Btn_DeleteSelection.Text = "删除选择集";
             this.Btn_DeleteSelection.Click += new System.EventHandler(this.Btn_DeleteSelection_Click);
-            // 
-            // Btn_RasterWith3DProperty
-            // 
-            this.Btn_RasterWith3DProperty.Name = "Btn_RasterWith3DProperty";
-            this.Btn_RasterWith3DProperty.Size = new System.Drawing.Size(224, 26);
-            this.Btn_RasterWith3DProperty.Text = "栅格增加基准面";
-            this.Btn_RasterWith3DProperty.Click += new System.EventHandler(this.Btn_RasterWith3DProperty_Click);
             // 
             // splitContainer1
             // 
@@ -321,7 +324,7 @@ namespace AEWINAPP202009
             this.tabSceneView.Controls.Add(this.Ctrl_Scene);
             this.tabSceneView.Location = new System.Drawing.Point(4, 25);
             this.tabSceneView.Name = "tabSceneView";
-            this.tabSceneView.Size = new System.Drawing.Size(687, 408);
+            this.tabSceneView.Size = new System.Drawing.Size(687, 402);
             this.tabSceneView.TabIndex = 2;
             this.tabSceneView.Text = "三维视图";
             this.tabSceneView.UseVisualStyleBackColor = true;
@@ -332,7 +335,7 @@ namespace AEWINAPP202009
             this.Ctrl_Scene.Location = new System.Drawing.Point(0, 0);
             this.Ctrl_Scene.Name = "Ctrl_Scene";
             this.Ctrl_Scene.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("Ctrl_Scene.OcxState")));
-            this.Ctrl_Scene.Size = new System.Drawing.Size(687, 408);
+            this.Ctrl_Scene.Size = new System.Drawing.Size(687, 402);
             this.Ctrl_Scene.TabIndex = 0;
             // 
             // Ctrl_ToolStrip
@@ -493,11 +496,26 @@ namespace AEWINAPP202009
             // 
             // Ctrl_Toolbar
             // 
-            this.Ctrl_Toolbar.Location = new System.Drawing.Point(520, 28);
+            this.Ctrl_Toolbar.Location = new System.Drawing.Point(544, 21);
             this.Ctrl_Toolbar.Name = "Ctrl_Toolbar";
             this.Ctrl_Toolbar.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("Ctrl_Toolbar.OcxState")));
             this.Ctrl_Toolbar.Size = new System.Drawing.Size(331, 28);
             this.Ctrl_Toolbar.TabIndex = 20;
+            // 
+            // Ctrl_SceneCMS
+            // 
+            this.Ctrl_SceneCMS.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.Ctrl_SceneCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Btn_SceneLayerStyle});
+            this.Ctrl_SceneCMS.Name = "Ctrl_SceneCMS";
+            this.Ctrl_SceneCMS.Size = new System.Drawing.Size(111, 28);
+            // 
+            // Btn_SceneLayerStyle
+            // 
+            this.Btn_SceneLayerStyle.Name = "Btn_SceneLayerStyle";
+            this.Btn_SceneLayerStyle.Size = new System.Drawing.Size(210, 24);
+            this.Btn_SceneLayerStyle.Text = "样式";
+            this.Btn_SceneLayerStyle.Click += new System.EventHandler(this.Btn_SceneLayerStyle_Click);
             // 
             // FormMain
             // 
@@ -514,7 +532,7 @@ namespace AEWINAPP202009
             this.Text = "FormMain";
             this.Move += new System.EventHandler(this.FormMain_Move);
             ((System.ComponentModel.ISupportInitialize)(this.Ctrl_TOC)).EndInit();
-            this.Ctrl_ContextMenuStrip.ResumeLayout(false);
+            this.Ctrl_MapCMS.ResumeLayout(false);
             this.Ctrl_MenuStrip.ResumeLayout(false);
             this.Ctrl_MenuStrip.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -533,6 +551,7 @@ namespace AEWINAPP202009
             this.Ctrl_StatusStrip.ResumeLayout(false);
             this.Ctrl_StatusStrip.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Ctrl_Toolbar)).EndInit();
+            this.Ctrl_SceneCMS.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -541,7 +560,7 @@ namespace AEWINAPP202009
         #endregion
 
         private ESRI.ArcGIS.Controls.AxTOCControl Ctrl_TOC;
-        private System.Windows.Forms.ContextMenuStrip Ctrl_ContextMenuStrip;
+        private System.Windows.Forms.ContextMenuStrip Ctrl_MapCMS;
         private System.Windows.Forms.ToolStripMenuItem Btn_AttributeTable;
         private System.Windows.Forms.ToolStripMenuItem Btn_ZoomToLayer;
         private System.Windows.Forms.ToolStripMenuItem Btn_RemoveLayer;
@@ -583,8 +602,10 @@ namespace AEWINAPP202009
         private System.Windows.Forms.ToolStripMenuItem Btn_RasterStatistic;
         private System.Windows.Forms.TabPage tabSceneView;
         private ESRI.ArcGIS.Controls.AxSceneControl Ctrl_Scene;
-        private System.Windows.Forms.ToolStripMenuItem Btn_RasterWith3DProperty;
         private ESRI.ArcGIS.Controls.AxToolbarControl Ctrl_Toolbar;
+        private System.Windows.Forms.ToolStripMenuItem Btn_AddLayerToScene;
+        private System.Windows.Forms.ContextMenuStrip Ctrl_SceneCMS;
+        private System.Windows.Forms.ToolStripMenuItem Btn_SceneLayerStyle;
     }
 }
 
