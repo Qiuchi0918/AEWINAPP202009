@@ -59,8 +59,7 @@ namespace AEWINAPP202009
         public void HightLightSelection()
         {
             dataGridView1.ClearSelection();
-            ICursor cursor;
-            (curFeatureLayer as IFeatureSelection).SelectionSet.Search(null, false, out cursor);
+            (curFeatureLayer as IFeatureSelection).SelectionSet.Search(null, false, out ICursor cursor);
             IFeature curFeature = (cursor as IFeatureCursor).NextFeature();
             if (curFeature != null)
                 dataGridView1.CurrentCell = dataGridView1.Rows[oidIndexDic[curFeature.OID]].Cells[0];

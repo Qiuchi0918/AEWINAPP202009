@@ -9,7 +9,6 @@ using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.GeoAnalyst;
 using ESRI.ArcGIS.DataSourcesRaster;
-using ESRI.ArcGIS.Analyst3D;
 
 namespace AEWINAPP202009
 {
@@ -28,13 +27,6 @@ namespace AEWINAPP202009
         #endregion
 
         #region Method
-        //public void FrmAttHighLightRow()
-        //{
-        //    if (m_FrmAttribute != null)
-        //    {
-        //        m_FrmAttribute.HightLightSelection();
-        //    }
-        //}
         private object RequestResponder(OperationType type, object param = null)
         {
             switch (type)
@@ -158,100 +150,6 @@ namespace AEWINAPP202009
             }
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //ITopologicalOperator tpop = featureBuffer.Shape as ITopologicalOperat快速获得FeatureClass的buffer的方法
-            ICursor ftCursor;
-            (m_selectedLayer as IFeatureSelection).SelectionSet.Search(null, false, out ftCursor);
-            IFeature selectedFeature = (ftCursor as IFeatureCursor).NextFeature();
-            ITopologicalOperator tpOp = selectedFeature as ITopologicalOperator;
-            IRelationalOperator reOp = selectedFeature.Shape as IRelationalOperator;
-            Ctrl_Map.Map.ClearSelection();
-            for (int i = 0; i < (m_selectedLayer as IFeatureLayer).FeatureClass.FeatureCount(null); i++)
-            {
-                IFeature curFeature = (m_selectedLayer as IFeatureLayer).FeatureClass.GetFeature(i);
-                if (reOp.Touches(curFeature.Shape))
-                {
-                    Ctrl_Map.Map.SelectFeature(m_selectedLayer, curFeature);
-                }
-            }
-            Ctrl_Map.Refresh();
-        }
-
-        private void Btn_ZoomIn_Click(object sender, EventArgs e)
-        {
-            ICommand pCmd;
-            if (Ctrl_Tab.SelectedIndex == 0)
-            {
-                pCmd = new ControlsMapZoomInToolClass();
-                pCmd.OnCreate(Ctrl_Map.Object);
-                Ctrl_Map.CurrentTool = pCmd as ITool;
-            }
-            else
-            {
-                pCmd = new ControlsPageZoomInToolClass();
-                pCmd.OnCreate(Ctrl_PageLayout.Object);
-                Ctrl_PageLayout.CurrentTool = pCmd as ITool;
-            }
-        }
-
-        private void Btn_ZoomOut_Click(object sender, EventArgs e)
-        {
-            ICommand pCmd;
-            if (Ctrl_Tab.SelectedIndex == 0)
-            {
-                pCmd = new ControlsMapZoomOutToolClass();
-                pCmd.OnCreate(Ctrl_Map.Object);
-                Ctrl_Map.CurrentTool = pCmd as ITool;
-            }
-            else
-            {
-                pCmd = new ControlsPageZoomOutToolClass();
-                pCmd.OnCreate(Ctrl_PageLayout.Object);
-                Ctrl_PageLayout.CurrentTool = pCmd as ITool;
-            }
-        }
-
-        private void Btn_Pan_Click(object sender, EventArgs e)
-        {
-            ICommand pCmd;
-            if (Ctrl_Tab.SelectedIndex == 0)
-            {
-                pCmd = new ControlsMapPanToolClass();
-                pCmd.OnCreate(Ctrl_Map.Object);
-                Ctrl_Map.CurrentTool = pCmd as ITool;
-            }
-            else
-            {
-                pCmd = new ControlsPagePanToolClass();
-                pCmd.OnCreate(Ctrl_PageLayout.Object);
-                Ctrl_PageLayout.CurrentTool = pCmd as ITool;
-            }
-        }
-
-        private void Btn_FullExtent_Click(object sender, EventArgs e)
-        {
-            ICommand pCmd;
-            if (Ctrl_Tab.SelectedIndex == 0)
-            {
-                pCmd = new ControlsMapFullExtentCommandClass();
-                pCmd.OnCreate(Ctrl_Map.Object);
-                pCmd.OnClick();
-            }
-            else
-            {
-                pCmd = new ControlsPageZoomWholePageCommandClass();
-                pCmd.OnCreate(Ctrl_PageLayout.Object);
-                pCmd.OnClick();
-            }
-        }
-
-        private void Btn_RemoveTool_Click(object sender, EventArgs e)
-        {
-            Ctrl_PageLayout.CurrentTool = null;
-            Ctrl_Map.CurrentTool = null;
-        }
-
         private void Btn_AddData_Click(object sender, EventArgs e)
         {
             ICommand pCmd = new ControlsAddDataCommandClass();
@@ -277,23 +175,6 @@ namespace AEWINAPP202009
             ICommand pCmd = new ControlsOpenDocCommandClass();
             pCmd.OnCreate(Ctrl_Map.Object);
             pCmd.OnClick();
-        }
-
-        private void Btn_Select_Click(object sender, EventArgs e)
-        {
-            ICommand pCmd;
-            if (Ctrl_Tab.SelectedIndex == 0)
-            {
-                pCmd = new ControlsSelectFeaturesToolClass();
-                pCmd.OnCreate(Ctrl_Map.Object);
-                Ctrl_Map.CurrentTool = pCmd as ITool;
-            }
-            else
-            {
-                pCmd = new ControlsSelectFeaturesToolClass();
-                pCmd.OnCreate(Ctrl_PageLayout.Object);
-                Ctrl_PageLayout.CurrentTool = pCmd as ITool;
-            }
         }
 
         private void Ctrl_Map_OnSelectionChanged(object sender, EventArgs e)
@@ -447,19 +328,63 @@ namespace AEWINAPP202009
 
         private void Ctrl_Tab_SelectedIndexChanged(object sender, EventArgs e)
         {
+            UID uID = new UIDClass();
             switch (Ctrl_Tab.SelectedIndex)
             {
                 case 0:
                     Ctrl_TOC.SetBuddyControl(Ctrl_Map.Object);
                     Ctrl_Toolbar.SetBuddyControl(Ctrl_Map.Object);
+
+                    Ctrl_Toolbar.RemoveAll();
+                    uID.Value = "esriControls.ControlsOpenDocCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsAddDataCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsMapZoomInTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, true, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsMapZoomOutTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsMapPanTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsMapFullExtentCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsSelectFeaturesTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, true, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsClearSelectionCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+
                     break;
                 case 1:
                     Ctrl_TOC.SetBuddyControl(Ctrl_PageLayout.Object);
                     Ctrl_Toolbar.SetBuddyControl(Ctrl_PageLayout.Object);
+
+                    Ctrl_Toolbar.RemoveAll();
+                    uID.Value = "esriControls.ControlsAddDataCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsPageZoomInTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, true, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsPageZoomOutTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsPagePanTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsPageZoomWholePageCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
                     break;
                 case 2:
                     Ctrl_TOC.SetBuddyControl(Ctrl_Scene.Object);
                     Ctrl_Toolbar.SetBuddyControl(Ctrl_Scene.Object);
+
+                    Ctrl_Toolbar.RemoveAll();
+                    uID.Value = "esriControls.ControlsSceneZoomInTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, true, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsSceneZoomOutTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsScenePanTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsSceneFullExtentCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsSceneNavigateTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
                     break;
                 default:
                     break;
@@ -508,6 +433,18 @@ namespace AEWINAPP202009
                 m_FrmSymbology = new FormSymbology(RequestResponder);
                 m_FrmSymbology.ShowDialog();
             }
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+            Ctrl_Tab.SelectedIndex = 1;
+            Ctrl_Tab.SelectedIndex = 0;
+        }
+
+        private void Ctrl_Scene_OnMouseMove(object sender, ISceneControlEvents_OnMouseMoveEvent e)
+        {
+            Lb_MouseX.Text = e.x.ToString();
+            Lb_MouseY.Text = e.y.ToString();
         }
     }
 }
