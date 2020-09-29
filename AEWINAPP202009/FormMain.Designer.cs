@@ -464,33 +464,33 @@ namespace AEWINAPP202009
             this.Btn_AddScaleBar,
             this.Btn_AddNorthArrow});
             this.Ctrl_PageLayoutCMS.Name = "Ctrl_PageLayoutCMS";
-            this.Ctrl_PageLayoutCMS.Size = new System.Drawing.Size(211, 128);
+            this.Ctrl_PageLayoutCMS.Size = new System.Drawing.Size(159, 100);
             // 
             // Btn_AddTitle
             // 
             this.Btn_AddTitle.Name = "Btn_AddTitle";
-            this.Btn_AddTitle.Size = new System.Drawing.Size(210, 24);
+            this.Btn_AddTitle.Size = new System.Drawing.Size(158, 24);
             this.Btn_AddTitle.Text = "添加标题";
             this.Btn_AddTitle.Click += new System.EventHandler(this.Btn_AddTitle_Click);
             // 
             // Btn_AddLegend
             // 
             this.Btn_AddLegend.Name = "Btn_AddLegend";
-            this.Btn_AddLegend.Size = new System.Drawing.Size(210, 24);
+            this.Btn_AddLegend.Size = new System.Drawing.Size(158, 24);
             this.Btn_AddLegend.Text = "添加图例";
             this.Btn_AddLegend.Click += new System.EventHandler(this.Btn_AddLegend_Click);
             // 
             // Btn_AddScaleBar
             // 
             this.Btn_AddScaleBar.Name = "Btn_AddScaleBar";
-            this.Btn_AddScaleBar.Size = new System.Drawing.Size(210, 24);
+            this.Btn_AddScaleBar.Size = new System.Drawing.Size(158, 24);
             this.Btn_AddScaleBar.Text = "添加比例尺";
             this.Btn_AddScaleBar.Click += new System.EventHandler(this.Btn_AddScaleBar_Click);
             // 
             // Btn_AddNorthArrow
             // 
             this.Btn_AddNorthArrow.Name = "Btn_AddNorthArrow";
-            this.Btn_AddNorthArrow.Size = new System.Drawing.Size(210, 24);
+            this.Btn_AddNorthArrow.Size = new System.Drawing.Size(158, 24);
             this.Btn_AddNorthArrow.Text = "添加指北针";
             this.Btn_AddNorthArrow.Click += new System.EventHandler(this.Btn_AddNorthArrow_Click);
             // 

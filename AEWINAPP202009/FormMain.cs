@@ -10,6 +10,8 @@ using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.GeoAnalyst;
 using ESRI.ArcGIS.DataSourcesRaster;
 using ESRI.ArcGIS.Display;
+using ESRI.ArcGIS.NetworkAnalyst;
+using ESRI.ArcGIS.DataSourcesGDB;
 
 namespace AEWINAPP202009
 {
@@ -22,11 +24,14 @@ namespace AEWINAPP202009
         FormSymbology m_FrmSymbology;
         #endregion
 
+        #region NAVar
+        INAContext m_NAContext;
+        IFeatureDataset featureDataset;
+        #endregion
+
+
         #region Varible
         ILayer m_selectedLayer;
-        IWorkspace m_workspace;
-
-        double m_nMouseDownPageX, m_nMouseDownPageY;
         IEnvelope m_pEnvelopDrawed;
         IElement m_pLegendElement;
         IElement m_pTitleElement;
@@ -36,6 +41,43 @@ namespace AEWINAPP202009
         #endregion
 
         #region Method
+        private INAContext CreateSolverContext(INetworkDataset networkDataset)
+        {
+            IDENetworkDataset dENetworkDataset = GetDENetworkDataset(networkDataset);
+            INASolver nASolver = new NARouteSolver();
+            INAContextEdit nAContextEdit = nASolver.CreateContext(dENetworkDataset, nASolver.Name) as INAContextEdit;
+            nAContextEdit.Bind(networkDataset, null);
+            return nAContextEdit as INAContext;
+        }
+        private IDENetworkDataset GetDENetworkDataset(INetworkDataset networkDataset)
+        {
+            IDatasetComponent datasetComponent = networkDataset as IDatasetComponent;
+            return datasetComponent.DataElement as IDENetworkDataset;
+        }
+        public IWorkspace OpenWorkspace(string path)
+        {
+            IWorkspaceFactory wsf = new FileGDBWorkspaceFactoryClass();
+            return wsf.OpenFromFile(path, 0);
+        }
+        private INetworkDataset OpenNetworkDataset(IWorkspace networkDatasetWorkspace, string networkDatasetName, string featureDatasetName)
+        {
+            if (networkDatasetWorkspace == null || networkDatasetName == "" || featureDatasetName == null)
+            {
+                return null;
+            }
+            IDatasetContainer2 datasetContainer2 = null;
+            IFeatureWorkspace featureWorkspace = networkDatasetWorkspace as IFeatureWorkspace;
+            featureDataset = featureWorkspace.OpenFeatureDataset(featureDatasetName);
+            IFeatureDatasetExtensionContainer featureDatasetExtensionContainer = featureDataset as IFeatureDatasetExtensionContainer;
+            IFeatureDatasetExtension featureDatasetExtension = featureDatasetExtensionContainer.FindExtension(esriDatasetType.esriDTNetworkDataset);
+            datasetContainer2 = featureDatasetExtension as IDatasetContainer3;
+            if (datasetContainer2 == null)
+            {
+                return null;
+            }
+            IDataset dataset = datasetContainer2.get_DatasetByName(esriDatasetType.esriDTNetworkDataset, networkDatasetName);
+            return dataset as INetworkDataset;
+        }
         private object RequestResponder(OperationType type, object param = null)
         {
             switch (type)
@@ -263,11 +305,9 @@ namespace AEWINAPP202009
         private void Btn_DeleteSelection_Click(object sender, EventArgs e)
         {
             IFeatureClass curFeatureClass = (m_selectedLayer as IFeatureLayer).FeatureClass;
-            ICursor cursor;
-            (m_selectedLayer as IFeatureSelection).SelectionSet.Search(null, true, out cursor);
+            (m_selectedLayer as IFeatureSelection).SelectionSet.Search(null, true, out ICursor cursor);
             IFeatureCursor searchCursor = cursor as IFeatureCursor;
             IFeature pFeature;
-            //List<int> deleteIndexLst = new List<int>();
             while ((pFeature = searchCursor.NextFeature()) != null)
             {
                 curFeatureClass.GetFeature(pFeature.OID).Delete();
@@ -362,9 +402,17 @@ namespace AEWINAPP202009
                     Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
                     uID.Value = "esriControls.ControlsSelectFeaturesTool";
                     Ctrl_Toolbar.AddItem(uID, -1, -1, true, -1, esriCommandStyles.esriCommandStyleIconAndText);
-                    uID.Value = "esriControls.ControlsClearSelectionCommand";
+                    
+                    uID.Value = "esriControls.ControlsNetworkAnalystWindowCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, true, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsNetworkAnalystCreateLocationTool";
                     Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
-
+                    uID.Value = "esriControls.ControlsNetworkAnalystSelectLocationTool";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsNetworkAnalystRouteCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    uID.Value = "esriControls.ControlsNetworkAnalystSolveCommand";
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
                     break;
                 case 1:
                     Ctrl_TOC.SetBuddyControl(Ctrl_PageLayout.Object);
@@ -451,6 +499,28 @@ namespace AEWINAPP202009
         {
             Ctrl_Tab.SelectedIndex = 1;
             Ctrl_Tab.SelectedIndex = 0;
+
+            IFeatureWorkspace pFWorkspace = OpenWorkspace(@"data.gdb") as IFeatureWorkspace;
+            INetworkDataset networkDataset = OpenNetworkDataset(pFWorkspace as IWorkspace, "rdCenLineDataSet_ND", "rdCenLineDataSet");
+            m_NAContext = CreateSolverContext(networkDataset);
+            INetworkLayer pNetworkLayer = new NetworkLayerClass();
+            pNetworkLayer.NetworkDataset = networkDataset;
+            ILayer pLayer = pNetworkLayer as ILayer;
+            pLayer.Name = "NetworkLayer";
+            Ctrl_Map.AddLayer(pLayer, 0);
+
+            IFeatureLayer pJunctionLayer = new FeatureLayerClass();
+            pJunctionLayer.FeatureClass = pFWorkspace.OpenFeatureClass("rdCenLineDataSet_ND_Junctions");
+            pJunctionLayer.Name = pJunctionLayer.FeatureClass.AliasName;
+            Ctrl_Map.AddLayer(pJunctionLayer, 0);
+            IFeatureLayer pRoadLayer = new FeatureLayerClass();
+            pRoadLayer.FeatureClass = pFWorkspace.OpenFeatureClass("road_toLine");
+            pRoadLayer.Name = pRoadLayer.FeatureClass.AliasName;
+            Ctrl_Map.AddLayer(pRoadLayer, 0);
+
+            INALayer pNALayer = m_NAContext.Solver.CreateLayer(m_NAContext);
+            (pNALayer as ILayer).Name = m_NAContext.Solver.DisplayName;
+            Ctrl_Map.AddLayer(pNALayer as ILayer, 0);
         }
 
         private void Ctrl_Scene_OnMouseMove(object sender, ISceneControlEvents_OnMouseMoveEvent e)
@@ -461,12 +531,6 @@ namespace AEWINAPP202009
 
         private void Ctrl_PageLayout_OnMouseUp(object sender, IPageLayoutControlEvents_OnMouseUpEvent e)
         {
-            m_pEnvelopDrawed = new EnvelopeClass();
-            m_pEnvelopDrawed.PutCoords(
-                m_nMouseDownPageX > e.pageX ? e.pageX : m_nMouseDownPageX,
-                m_nMouseDownPageY > e.pageY ? e.pageY : m_nMouseDownPageY,
-                m_nMouseDownPageX < e.pageX ? e.pageX : m_nMouseDownPageX,
-                m_nMouseDownPageY < e.pageY ? e.pageY : m_nMouseDownPageY);
             if (e.button != 2)
                 return;
             Ctrl_PageLayoutCMS.Show(MousePosition);
@@ -577,8 +641,8 @@ namespace AEWINAPP202009
 
         private void Ctrl_PageLayout_OnMouseDown(object sender, IPageLayoutControlEvents_OnMouseDownEvent e)
         {
-            m_nMouseDownPageX = e.pageX;
-            m_nMouseDownPageY = e.pageY;
+            if (e.button == 4)
+                m_pEnvelopDrawed = Ctrl_PageLayout.TrackRectangle();
         }
     }
 }
