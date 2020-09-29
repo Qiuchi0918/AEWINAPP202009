@@ -72,10 +72,10 @@ namespace AEWINAPP202009
             this.Btn_SceneLayerStyle = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new System.Windows.Forms.Panel();
             this.Ctrl_PageLayoutCMS = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.添加标题ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Btn_AddTitle = new System.Windows.Forms.ToolStripMenuItem();
             this.Btn_AddLegend = new System.Windows.Forms.ToolStripMenuItem();
-            this.添加比例尺ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.添加指南针ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Btn_AddScaleBar = new System.Windows.Forms.ToolStripMenuItem();
+            this.Btn_AddNorthArrow = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.Ctrl_TOC)).BeginInit();
             this.Ctrl_MapTOCCMS.SuspendLayout();
             this.Ctrl_MenuStrip.SuspendLayout();
@@ -459,18 +459,19 @@ namespace AEWINAPP202009
             // 
             this.Ctrl_PageLayoutCMS.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.Ctrl_PageLayoutCMS.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.添加标题ToolStripMenuItem,
+            this.Btn_AddTitle,
             this.Btn_AddLegend,
-            this.添加比例尺ToolStripMenuItem,
-            this.添加指南针ToolStripMenuItem});
+            this.Btn_AddScaleBar,
+            this.Btn_AddNorthArrow});
             this.Ctrl_PageLayoutCMS.Name = "Ctrl_PageLayoutCMS";
-            this.Ctrl_PageLayoutCMS.Size = new System.Drawing.Size(159, 100);
+            this.Ctrl_PageLayoutCMS.Size = new System.Drawing.Size(211, 128);
             // 
-            // 添加标题ToolStripMenuItem
+            // Btn_AddTitle
             // 
-            this.添加标题ToolStripMenuItem.Name = "添加标题ToolStripMenuItem";
-            this.添加标题ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-            this.添加标题ToolStripMenuItem.Text = "添加标题";
+            this.Btn_AddTitle.Name = "Btn_AddTitle";
+            this.Btn_AddTitle.Size = new System.Drawing.Size(210, 24);
+            this.Btn_AddTitle.Text = "添加标题";
+            this.Btn_AddTitle.Click += new System.EventHandler(this.Btn_AddTitle_Click);
             // 
             // Btn_AddLegend
             // 
@@ -479,17 +480,19 @@ namespace AEWINAPP202009
             this.Btn_AddLegend.Text = "添加图例";
             this.Btn_AddLegend.Click += new System.EventHandler(this.Btn_AddLegend_Click);
             // 
-            // 添加比例尺ToolStripMenuItem
+            // Btn_AddScaleBar
             // 
-            this.添加比例尺ToolStripMenuItem.Name = "添加比例尺ToolStripMenuItem";
-            this.添加比例尺ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-            this.添加比例尺ToolStripMenuItem.Text = "添加比例尺";
+            this.Btn_AddScaleBar.Name = "Btn_AddScaleBar";
+            this.Btn_AddScaleBar.Size = new System.Drawing.Size(210, 24);
+            this.Btn_AddScaleBar.Text = "添加比例尺";
+            this.Btn_AddScaleBar.Click += new System.EventHandler(this.Btn_AddScaleBar_Click);
             // 
-            // 添加指南针ToolStripMenuItem
+            // Btn_AddNorthArrow
             // 
-            this.添加指南针ToolStripMenuItem.Name = "添加指南针ToolStripMenuItem";
-            this.添加指南针ToolStripMenuItem.Size = new System.Drawing.Size(210, 24);
-            this.添加指南针ToolStripMenuItem.Text = "添加指北针";
+            this.Btn_AddNorthArrow.Name = "Btn_AddNorthArrow";
+            this.Btn_AddNorthArrow.Size = new System.Drawing.Size(210, 24);
+            this.Btn_AddNorthArrow.Text = "添加指北针";
+            this.Btn_AddNorthArrow.Click += new System.EventHandler(this.Btn_AddNorthArrow_Click);
             // 
             // FormMain
             // 
@@ -575,10 +578,10 @@ namespace AEWINAPP202009
         private System.Windows.Forms.ToolStripMenuItem Btn_SceneLayerStyle;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ContextMenuStrip Ctrl_PageLayoutCMS;
-        private System.Windows.Forms.ToolStripMenuItem 添加标题ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Btn_AddTitle;
         private System.Windows.Forms.ToolStripMenuItem Btn_AddLegend;
-        private System.Windows.Forms.ToolStripMenuItem 添加比例尺ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 添加指南针ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem Btn_AddScaleBar;
+        private System.Windows.Forms.ToolStripMenuItem Btn_AddNorthArrow;
     }
 }
 

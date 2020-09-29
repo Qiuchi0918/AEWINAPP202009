@@ -9,6 +9,7 @@ namespace AEWINAPP202009
     public delegate object FormMainOperation(OperationType _t, object param = null);
     public enum OperationType
     {
+        SentStyleGalleryItem,
         UpdateTOCCtrl,
         RefreshMapCtrl,
         ClearSelection,

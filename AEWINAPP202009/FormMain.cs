@@ -9,7 +9,7 @@ using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.GeoAnalyst;
 using ESRI.ArcGIS.DataSourcesRaster;
-using ESRI.ArcGIS.Output;
+using ESRI.ArcGIS.Display;
 
 namespace AEWINAPP202009
 {
@@ -29,6 +29,10 @@ namespace AEWINAPP202009
         double m_nMouseDownPageX, m_nMouseDownPageY;
         IEnvelope m_pEnvelopDrawed;
         IElement m_pLegendElement;
+        IElement m_pTitleElement;
+        IElement m_pScaleBarElement;
+        IElement m_pNorthArrowElement;
+        IStyleGalleryItem m_pStyleGalleryItem;
         #endregion
 
         #region Method
@@ -36,6 +40,9 @@ namespace AEWINAPP202009
         {
             switch (type)
             {
+                case OperationType.SentStyleGalleryItem:
+                    m_pStyleGalleryItem = param as IStyleGalleryItem;
+                    return null;
                 case OperationType.GetViewIndex:
                     return Ctrl_Tab.SelectedIndex;
                 case OperationType.GetSelectedLayer:
@@ -488,6 +495,83 @@ namespace AEWINAPP202009
                 Ctrl_PageLayout.ActiveView.GraphicsContainer.DeleteElement(m_pLegendElement);
             Ctrl_PageLayout.ActiveView.GraphicsContainer.AddElement(pElement, 0);
             m_pLegendElement = pElement;
+            Ctrl_PageLayout.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+        }
+
+        private void Btn_AddTitle_Click(object sender, EventArgs e)
+        {
+            ITextSymbol textSymbol = new TextSymbolClass();
+            textSymbol.Color = Tool_.PutRGB(0,0,0);
+            stdole.IFontDisp font = new stdole.StdFontClass() as stdole.IFontDisp;
+            font.Bold = true;
+            font.Italic = true;
+            textSymbol.Font = font;
+            textSymbol.Size = m_pEnvelopDrawed.Width * 20;
+            IGraphicsContainer pGraphicsContainer = Ctrl_PageLayout.ActiveView.GraphicsContainer;
+            ITextElement pTextElement = new TextElementClass
+            {
+                ScaleText = true,
+                Symbol = textSymbol,
+                Text = "Title"
+            };
+            if (m_pTitleElement != null)
+                pGraphicsContainer.DeleteElement(m_pTitleElement);
+            IElement pElement = pTextElement as IElement;
+            IPoint pPosition = new PointClass();
+            pPosition.PutCoords(
+                m_pEnvelopDrawed.XMin + (m_pEnvelopDrawed.XMax - m_pEnvelopDrawed.XMin) / 2,
+                m_pEnvelopDrawed.YMin + (m_pEnvelopDrawed.YMax - m_pEnvelopDrawed.YMin) / 2);
+            pElement.Geometry = pPosition;
+            pGraphicsContainer.AddElement(pElement, 0);
+            m_pTitleElement = pElement;
+            Ctrl_PageLayout.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+        }
+
+        private void Btn_AddScaleBar_Click(object sender, EventArgs e)
+        {
+            FormSymbologySelector formSymbologySelector = new FormSymbologySelector(RequestResponder, esriSymbologyStyleClass.esriStyleClassScaleBars);
+            formSymbologySelector.ShowDialog();
+            IActiveView pActiveView = Ctrl_PageLayout.ActiveView;
+            IMap pMap = Ctrl_PageLayout.ActiveView.FocusMap;
+            IMapFrame pMapFrame= (IMapFrame)Ctrl_PageLayout.ActiveView.GraphicsContainer.FindFrame(pMap);
+            IMapSurroundFrame pMapSurroundFrame = new MapSurroundFrameClass
+            {
+                MapFrame = pMapFrame,
+                MapSurround = (IMapSurround)m_pStyleGalleryItem.Item
+            };
+            IElement pElement = (IElement)pMapSurroundFrame;
+            pElement.Geometry = m_pEnvelopDrawed;
+            if (m_pScaleBarElement != null)
+                pActiveView.GraphicsContainer.DeleteElement(m_pScaleBarElement);
+            pActiveView.GraphicsContainer.AddElement(pElement, 0);
+            m_pScaleBarElement = pElement;
+            pActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, pMapSurroundFrame, null);
+        }
+
+        private void Btn_AddNorthArrow_Click(object sender, EventArgs e)
+        {
+            FormSymbologySelector formSymbologySelector = new FormSymbologySelector(RequestResponder, esriSymbologyStyleClass.esriStyleClassNorthArrows);
+            formSymbologySelector.ShowDialog();
+            IGraphicsContainer pGraphicsContainer = Ctrl_PageLayout.ActiveView.GraphicsContainer;
+            IMapFrame pMapFrame = (IMapFrame)pGraphicsContainer.FindFrame(Ctrl_PageLayout.ActiveView.FocusMap);
+            if (pMapFrame == null)
+                return;
+            UID uid = new UIDClass
+            {
+                Value = "esriCarto.MarkerNorthArrow"
+            };
+            IMapSurroundFrame pMapSurroundFrame = pMapFrame.CreateSurroundFrame(uid, null);
+            if (pMapSurroundFrame == null || pMapSurroundFrame.MapSurround == null)
+                return;
+            INorthArrow pNorthArrow = m_pStyleGalleryItem.Item as INorthArrow;
+            pNorthArrow.Size = m_pEnvelopDrawed.Width * 100;
+            pMapSurroundFrame.MapSurround = pNorthArrow;
+            IElement pElement = (IElement)pMapSurroundFrame;
+            pElement.Geometry = m_pEnvelopDrawed;
+            if (m_pNorthArrowElement != null)
+                Ctrl_PageLayout.ActiveView.GraphicsContainer.DeleteElement(m_pNorthArrowElement);
+            Ctrl_PageLayout.ActiveView.GraphicsContainer.AddElement(pElement, 0);
+            m_pNorthArrowElement = pElement;
             Ctrl_PageLayout.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
         }
 
