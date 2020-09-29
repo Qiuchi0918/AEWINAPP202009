@@ -9,6 +9,7 @@ using ESRI.ArcGIS.Controls;
 using ESRI.ArcGIS.esriSystem;
 using ESRI.ArcGIS.GeoAnalyst;
 using ESRI.ArcGIS.DataSourcesRaster;
+using ESRI.ArcGIS.Output;
 
 namespace AEWINAPP202009
 {
@@ -24,6 +25,10 @@ namespace AEWINAPP202009
         #region Varible
         ILayer m_selectedLayer;
         IWorkspace m_workspace;
+
+        double m_nMouseDownPageX, m_nMouseDownPageY;
+        IEnvelope m_pEnvelopDrawed;
+        IElement m_pLegendElement;
         #endregion
 
         #region Method
@@ -376,7 +381,7 @@ namespace AEWINAPP202009
 
                     Ctrl_Toolbar.RemoveAll();
                     uID.Value = "esriControls.ControlsSceneZoomInTool";
-                    Ctrl_Toolbar.AddItem(uID, -1, -1, true, -1, esriCommandStyles.esriCommandStyleIconAndText);
+                    Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
                     uID.Value = "esriControls.ControlsSceneZoomOutTool";
                     Ctrl_Toolbar.AddItem(uID, -1, -1, false, -1, esriCommandStyles.esriCommandStyleIconAndText);
                     uID.Value = "esriControls.ControlsScenePanTool";
@@ -406,15 +411,15 @@ namespace AEWINAPP202009
             {
                 case 0:
                     if (e.button == 2)
-                        Ctrl_MapCMS.Show(Control.MousePosition);
+                        Ctrl_MapTOCCMS.Show(Control.MousePosition);
                     break;
                 case 1:
                     if (e.button == 2)
-                        Ctrl_MapCMS.Show(Control.MousePosition);
+                        Ctrl_MapTOCCMS.Show(Control.MousePosition);
                     break;
                 case 2:
                     if (e.button == 2)
-                        Ctrl_SceneCMS.Show(Control.MousePosition);
+                        Ctrl_SceneTOCCMS.Show(Control.MousePosition);
                     break;
                 default:
                     break;
@@ -445,6 +450,51 @@ namespace AEWINAPP202009
         {
             Lb_MouseX.Text = e.x.ToString();
             Lb_MouseY.Text = e.y.ToString();
+        }
+
+        private void Ctrl_PageLayout_OnMouseUp(object sender, IPageLayoutControlEvents_OnMouseUpEvent e)
+        {
+            m_pEnvelopDrawed = new EnvelopeClass();
+            m_pEnvelopDrawed.PutCoords(
+                m_nMouseDownPageX > e.pageX ? e.pageX : m_nMouseDownPageX,
+                m_nMouseDownPageY > e.pageY ? e.pageY : m_nMouseDownPageY,
+                m_nMouseDownPageX < e.pageX ? e.pageX : m_nMouseDownPageX,
+                m_nMouseDownPageY < e.pageY ? e.pageY : m_nMouseDownPageY);
+            if (e.button != 2)
+                return;
+            Ctrl_PageLayoutCMS.Show(MousePosition);
+        }
+
+        private void Btn_AddLegend_Click(object sender, EventArgs e)
+        {
+            IGraphicsContainer pGraphicsContainer = Ctrl_PageLayout.ActiveView.GraphicsContainer;
+            IMapFrame pMapFrame = (IMapFrame)pGraphicsContainer.FindFrame(Ctrl_PageLayout.ActiveView.FocusMap);
+            if (pMapFrame == null)
+                return;
+            UID uid = new UIDClass
+            {
+                Value = "esriCarto.Legend"
+            };
+            IMapSurroundFrame pMapSurroundFrame = pMapFrame.CreateSurroundFrame(uid, null);
+            if (pMapSurroundFrame == null || pMapSurroundFrame.MapSurround == null)
+                return;
+            pMapSurroundFrame.MapSurround.Name = "Legend";
+            ILegend pLegend = new Legend();
+            pLegend = pMapSurroundFrame.MapSurround as ILegend;
+            pLegend.Title = "Legend";
+            IElement pElement = (IElement)pMapSurroundFrame;
+            pElement.Geometry = m_pEnvelopDrawed;
+            if (m_pLegendElement != null)
+                Ctrl_PageLayout.ActiveView.GraphicsContainer.DeleteElement(m_pLegendElement);
+            Ctrl_PageLayout.ActiveView.GraphicsContainer.AddElement(pElement, 0);
+            m_pLegendElement = pElement;
+            Ctrl_PageLayout.ActiveView.PartialRefresh(esriViewDrawPhase.esriViewGraphics, null, null);
+        }
+
+        private void Ctrl_PageLayout_OnMouseDown(object sender, IPageLayoutControlEvents_OnMouseDownEvent e)
+        {
+            m_nMouseDownPageX = e.pageX;
+            m_nMouseDownPageY = e.pageY;
         }
     }
 }

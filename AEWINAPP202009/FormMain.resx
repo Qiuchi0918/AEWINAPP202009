@@ -130,7 +130,7 @@
         AAAAAAAL
 </value>
   </data>
-  <metadata name="Ctrl_MapCMS.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="Ctrl_MapTOCCMS.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>29, 16</value>
   </metadata>
   <metadata name="Ctrl_MenuStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -148,59 +148,10 @@
   <metadata name="tabDataView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="tabDesignView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="tabSceneView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="tabDataView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
   <metadata name="Ctrl_Map.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
-  <metadata name="Ctrl_Map.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <data name="Ctrl_Map.OcxState" mimetype="application/x-microsoft.net.object.binary.base64">
-    <value>
-        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
-        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFTeXN0
-        ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAGwYAAAIB
-        AAAAAQAAAAAAAAAAAAAAAAYGAAALAAAAAgAAAAAAAAABAAAACQAAAAC2RAAACyUAAAAAAQAAAAEAAAAA
-        AAAAAAAAAAAAAAANAAAAAAAAAAAAAAAAAAAAAAD//wD//3aqveY1TdARmL4AgF987SEAAAAAMwAMAAAA
-        TQBhAHAAMQAzAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////g7tGlhKV0hGi9ggACbbyKwEA
-        AAAGAAEAAAAAAAAAFAAAADwARABlAGYAYQB1AGwAdAA+AAAA/////wAAAAAAAAAAAAAAAAAAAAAAAAMA
-        AAABAAAAAQAAAHI5j86+6dERojIIAAm28isCAAAABAAAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAA
-        AAAAAAAAAAAAAAAAgHqoptEdshG/UQgAICL1cwMAAAAHAL8AAABHRU9HQ1NbIkdDU19Ob3J0aF9BbWVy
-        aWNhbl8xOTI3IixEQVRVTVsiRF9Ob3J0aF9BbWVyaWNhbl8xOTI3IixTUEhFUk9JRFsiQ2xhcmtlXzE4
-        NjYiLDYzNzgyMDYuNCwyOTQuOTc4Njk4Ml1dLFBSSU1FTVsiR3JlZW53aWNoIiwwLjBdLFVOSVRbIkRl
-        Z3JlZSIsMC4wMTc0NTMyOTI1MTk5NDMzXSxBVVRIT1JJVFlbIkVQU0ciLDQyNjddXQAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAACAZsAAAAAAAIBmQAEAAAAAAAAAecAAAAAAAAB5wP////9kzc1BAAAAAABq+MAAAAAA
-        AIjDQAAAAAAAavjAAAAAAACIw0DR3LWcfEpDPvyp8dJNYlA//Knx0k1iUD8CAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECPQAAAAAAAQI9AAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAEAvNRyOKdMRn08AwE9rxhkEAAAAAQAGIQkUjpjjvwYh
-        CRSOmOM/AAAAAAAA4D8AAAAAAAAIQP//AAAACAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAAAA
-        AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAAAAVj3H4IhsjEm3fHhgbmiMlwUA
-        AAACAAAAlsTpfiPR0BGDgwgACbmWzAYAAAABAAEAAOAcWKwERkxACRdoUZA5U0CCorjUngZRQAEAAAAA
-        AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAACAAAAAAAAAAAAAgAAAAAA//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA
-        AAAAAAAA//8KAAAAAAAAAABAj0AAAAAAAIjDQAAAAAAAcNdAAAAAAABq+EAAAAAAgIQOQQAAAACAhB5B
-        AAAAAGDjJkEAAAAAgIQuQQAAAABg40ZBAAAAANASY0EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        /////wIAAAAAAP//CgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA9AEAAAAAAAAAAP//
-        //8L
-</value>
-  </data>
   <metadata name="tabDesignView.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Ctrl_PageLayout.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
   <metadata name="Ctrl_PageLayout.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
@@ -266,6 +217,43 @@
   <metadata name="Ctrl_Scene.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
+  <metadata name="Ctrl_Map.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="Ctrl_Map.OcxState" mimetype="application/x-microsoft.net.object.binary.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFdTeXN0ZW0uV2luZG93cy5Gb3JtcywgVmVyc2lvbj00LjAuMC4w
+        LCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPWI3N2E1YzU2MTkzNGUwODkFAQAAACFTeXN0
+        ZW0uV2luZG93cy5Gb3Jtcy5BeEhvc3QrU3RhdGUBAAAABERhdGEHAgIAAAAJAwAAAA8DAAAAGwYAAAIB
+        AAAAAQAAAAAAAAAAAAAAAAYGAAALAAAAAgAAAAAAAAABAAAACQAAAAC2RAAACyUAAAAAAQAAAAEAAAAA
+        AAAAAAAAAAAAAAANAAAAAAAAAAAAAAAAAAAAAAD//wD//3aqveY1TdARmL4AgF987SEAAAAAMwAMAAAA
+        TQBhAHAAMQAzAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////g7tGlhKV0hGi9ggACbbyKwEA
+        AAAGAAEAAAAAAAAAFAAAADwARABlAGYAYQB1AGwAdAA+AAAA/////wAAAAAAAAAAAAAAAAAAAAAAAAMA
+        AAABAAAAAQAAAHI5j86+6dERojIIAAm28isCAAAABAAAAAAAAAAAAAAAAAABAAAAAAAAAAEAAAAAAAAA
+        AAAAAAAAAAAAAAAAgHqoptEdshG/UQgAICL1cwMAAAAHAL8AAABHRU9HQ1NbIkdDU19Ob3J0aF9BbWVy
+        aWNhbl8xOTI3IixEQVRVTVsiRF9Ob3J0aF9BbWVyaWNhbl8xOTI3IixTUEhFUk9JRFsiQ2xhcmtlXzE4
+        NjYiLDYzNzgyMDYuNCwyOTQuOTc4Njk4Ml1dLFBSSU1FTVsiR3JlZW53aWNoIiwwLjBdLFVOSVRbIkRl
+        Z3JlZSIsMC4wMTc0NTMyOTI1MTk5NDMzXSxBVVRIT1JJVFlbIkVQU0ciLDQyNjddXQAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAACAZsAAAAAAAIBmQAEAAAAAAAAAecAAAAAAAAB5wP////9kzc1BAAAAAABq+MAAAAAA
+        AIjDQAAAAAAAavjAAAAAAACIw0DR3LWcfEpDPvyp8dJNYlA//Knx0k1iUD8CAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAECPQAAAAAAAQI9AAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAEAvNRyOKdMRn08AwE9rxhkEAAAAAQAGIQkUjpjjvwYh
+        CRSOmOM/AAAAAAAA4D8AAAAAAAAIQP//AAAACAAAAAD//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAAAA
+        AAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA//8AAAAAAAAAAAAAAAAAAAAAVj3H4IhsjEm3fHhgbmiMlwUA
+        AAACAAAAlsTpfiPR0BGDgwgACbmWzAYAAAABAAEAAOAcWKwERkxACRdoUZA5U0CCorjUngZRQAEAAAAA
+        AAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAACAAAAAAAAAAAAAgAAAAAA//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA
+        AAAAAAAA//8KAAAAAAAAAABAj0AAAAAAAIjDQAAAAAAAcNdAAAAAAABq+EAAAAAAgIQOQQAAAACAhB5B
+        AAAAAGDjJkEAAAAAgIQuQQAAAABg40ZBAAAAANASY0EAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+        /////wIAAAAAAP//CgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAA
+        AAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA9AEAAAAAAAAAAP//
+        //8L
+</value>
+  </data>
   <metadata name="Ctrl_Scene.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -279,7 +267,7 @@
 </value>
   </data>
   <metadata name="Ctrl_StatusStrip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>534, 17</value>
+    <value>547, 26</value>
   </metadata>
   <metadata name="Ctrl_StatusStrip.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -297,11 +285,14 @@
         AAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA8AAIAAAAAAAAAPAACAAAAAAAAAAAAQAAAAEAAAAAs=
 </value>
   </data>
-  <metadata name="Ctrl_SceneCMS.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>691, 20</value>
+  <metadata name="Ctrl_SceneTOCCMS.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>364, 21</value>
   </metadata>
   <metadata name="panel1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
+  </metadata>
+  <metadata name="Ctrl_PageLayoutCMS.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>707, 26</value>
   </metadata>
   <metadata name="$this.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

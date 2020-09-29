@@ -44,14 +44,14 @@
             this.GBox_SimpleSymbol = new System.Windows.Forms.GroupBox();
             this.Ctrl_Tab = new System.Windows.Forms.TabControl();
             this.Tab_Map = new System.Windows.Forms.TabPage();
+            this.GBox_Renderer = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.Lb_TargetFieldName = new System.Windows.Forms.Label();
             this.Tab_Scene = new System.Windows.Forms.TabPage();
-            this.Btn_ApplyRasterBaseSurface = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.Btn_ApplyRasterBaseSurface = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.CbBoxBaseLayer = new System.Windows.Forms.ComboBox();
-            this.GBox_Renderer = new System.Windows.Forms.GroupBox();
-            this.Lb_TargetFieldName = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -59,10 +59,10 @@
             this.GBox_SimpleSymbol.SuspendLayout();
             this.Ctrl_Tab.SuspendLayout();
             this.Tab_Map.SuspendLayout();
-            this.Tab_Scene.SuspendLayout();
-            this.groupBox4.SuspendLayout();
             this.GBox_Renderer.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.Tab_Scene.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -204,7 +204,7 @@
             this.Ctrl_Tab.Location = new System.Drawing.Point(0, 0);
             this.Ctrl_Tab.Name = "Ctrl_Tab";
             this.Ctrl_Tab.SelectedIndex = 0;
-            this.Ctrl_Tab.Size = new System.Drawing.Size(559, 299);
+            this.Ctrl_Tab.Size = new System.Drawing.Size(548, 474);
             this.Ctrl_Tab.TabIndex = 14;
             // 
             // Tab_Map
@@ -214,9 +214,44 @@
             this.Tab_Map.Location = new System.Drawing.Point(4, 25);
             this.Tab_Map.Name = "Tab_Map";
             this.Tab_Map.Padding = new System.Windows.Forms.Padding(3);
-            this.Tab_Map.Size = new System.Drawing.Size(551, 270);
+            this.Tab_Map.Size = new System.Drawing.Size(540, 445);
             this.Tab_Map.TabIndex = 0;
             this.Tab_Map.Text = "Map";
+            // 
+            // GBox_Renderer
+            // 
+            this.GBox_Renderer.Controls.Add(this.groupBox3);
+            this.GBox_Renderer.Controls.Add(this.Lb_TargetFieldName);
+            this.GBox_Renderer.Controls.Add(this.comboBox1);
+            this.GBox_Renderer.Controls.Add(this.button7);
+            this.GBox_Renderer.Controls.Add(this.Btn_ApplyUVR);
+            this.GBox_Renderer.Controls.Add(this.Btn_ApplyCR);
+            this.GBox_Renderer.Controls.Add(this.Btn_ApplyCBR);
+            this.GBox_Renderer.Location = new System.Drawing.Point(277, 25);
+            this.GBox_Renderer.Name = "GBox_Renderer";
+            this.GBox_Renderer.Size = new System.Drawing.Size(242, 232);
+            this.GBox_Renderer.TabIndex = 14;
+            this.GBox_Renderer.TabStop = false;
+            this.GBox_Renderer.Text = "渲染器";
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.trackBar2);
+            this.groupBox3.Location = new System.Drawing.Point(12, 135);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(218, 84);
+            this.groupBox3.TabIndex = 13;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "分类数";
+            // 
+            // Lb_TargetFieldName
+            // 
+            this.Lb_TargetFieldName.AutoSize = true;
+            this.Lb_TargetFieldName.Location = new System.Drawing.Point(15, 21);
+            this.Lb_TargetFieldName.Name = "Lb_TargetFieldName";
+            this.Lb_TargetFieldName.Size = new System.Drawing.Size(75, 15);
+            this.Lb_TargetFieldName.TabIndex = 6;
+            this.Lb_TargetFieldName.Text = "目标字段:";
             // 
             // Tab_Scene
             // 
@@ -229,16 +264,6 @@
             this.Tab_Scene.TabIndex = 1;
             this.Tab_Scene.Text = "Scene";
             // 
-            // Btn_ApplyRasterBaseSurface
-            // 
-            this.Btn_ApplyRasterBaseSurface.Location = new System.Drawing.Point(113, 19);
-            this.Btn_ApplyRasterBaseSurface.Name = "Btn_ApplyRasterBaseSurface";
-            this.Btn_ApplyRasterBaseSurface.Size = new System.Drawing.Size(49, 43);
-            this.Btn_ApplyRasterBaseSurface.TabIndex = 1;
-            this.Btn_ApplyRasterBaseSurface.Text = "应用";
-            this.Btn_ApplyRasterBaseSurface.UseVisualStyleBackColor = true;
-            this.Btn_ApplyRasterBaseSurface.Click += new System.EventHandler(this.Btn_ApplyRasterBaseSurface_Click);
-            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.Btn_ApplyRasterBaseSurface);
@@ -250,6 +275,16 @@
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "栅格显示基准面";
+            // 
+            // Btn_ApplyRasterBaseSurface
+            // 
+            this.Btn_ApplyRasterBaseSurface.Location = new System.Drawing.Point(113, 19);
+            this.Btn_ApplyRasterBaseSurface.Name = "Btn_ApplyRasterBaseSurface";
+            this.Btn_ApplyRasterBaseSurface.Size = new System.Drawing.Size(49, 43);
+            this.Btn_ApplyRasterBaseSurface.TabIndex = 1;
+            this.Btn_ApplyRasterBaseSurface.Text = "应用";
+            this.Btn_ApplyRasterBaseSurface.UseVisualStyleBackColor = true;
+            this.Btn_ApplyRasterBaseSurface.Click += new System.EventHandler(this.Btn_ApplyRasterBaseSurface_Click);
             // 
             // label1
             // 
@@ -268,46 +303,11 @@
             this.CbBoxBaseLayer.Size = new System.Drawing.Size(87, 23);
             this.CbBoxBaseLayer.TabIndex = 0;
             // 
-            // GBox_Renderer
-            // 
-            this.GBox_Renderer.Controls.Add(this.groupBox3);
-            this.GBox_Renderer.Controls.Add(this.Lb_TargetFieldName);
-            this.GBox_Renderer.Controls.Add(this.comboBox1);
-            this.GBox_Renderer.Controls.Add(this.button7);
-            this.GBox_Renderer.Controls.Add(this.Btn_ApplyUVR);
-            this.GBox_Renderer.Controls.Add(this.Btn_ApplyCR);
-            this.GBox_Renderer.Controls.Add(this.Btn_ApplyCBR);
-            this.GBox_Renderer.Location = new System.Drawing.Point(277, 25);
-            this.GBox_Renderer.Name = "GBox_Renderer";
-            this.GBox_Renderer.Size = new System.Drawing.Size(242, 232);
-            this.GBox_Renderer.TabIndex = 14;
-            this.GBox_Renderer.TabStop = false;
-            this.GBox_Renderer.Text = "渲染器";
-            // 
-            // Lb_TargetFieldName
-            // 
-            this.Lb_TargetFieldName.AutoSize = true;
-            this.Lb_TargetFieldName.Location = new System.Drawing.Point(15, 21);
-            this.Lb_TargetFieldName.Name = "Lb_TargetFieldName";
-            this.Lb_TargetFieldName.Size = new System.Drawing.Size(75, 15);
-            this.Lb_TargetFieldName.TabIndex = 6;
-            this.Lb_TargetFieldName.Text = "目标字段:";
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.trackBar2);
-            this.groupBox3.Location = new System.Drawing.Point(12, 135);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(218, 84);
-            this.groupBox3.TabIndex = 13;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "分类数";
-            // 
             // FormSymbology
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 299);
+            this.ClientSize = new System.Drawing.Size(548, 474);
             this.Controls.Add(this.Ctrl_Tab);
             this.Name = "FormSymbology";
             this.Text = "Symbol";
@@ -319,13 +319,13 @@
             this.GBox_SimpleSymbol.ResumeLayout(false);
             this.Ctrl_Tab.ResumeLayout(false);
             this.Tab_Map.ResumeLayout(false);
-            this.Tab_Scene.ResumeLayout(false);
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
             this.GBox_Renderer.ResumeLayout(false);
             this.GBox_Renderer.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.Tab_Scene.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
